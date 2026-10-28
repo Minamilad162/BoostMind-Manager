@@ -1,0 +1,5 @@
+project_id = "boostmind-os-new"
+[functions.invite-member]
+verify_jwt = true
+[functions.manage-member]
+verify_jwt = true

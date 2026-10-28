@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {projectFinance,taskProgress,fyFor,inFY} from '../src/lib/finance.ts';
+const p={id:'p1',contract_amount:120000,currency:'EGP'};
+const payments=[{project_id:'p1',amount:75000},{project_id:'p1',amount:25000},{project_id:'other',amount:999}];
+const expenses=[{project_id:'p1',status:'paid',amount:20000,paid_by:'mina'},{project_id:'p1',status:'paid',amount:10000,paid_by:'company'},{project_id:'p1',status:'planned',amount:5000,paid_by:'bishoy'}];
+test('50/50 realized profit separates paid from planned expenses',()=>{const r=projectFinance(p,payments,expenses,[]);assert.equal(r.contracted,120000);assert.equal(r.collected,100000);assert.equal(r.paidExpenses,30000);assert.equal(r.plannedExpenses,5000);assert.equal(r.net,70000);assert.equal(r.mina.profit,35000);assert.equal(r.bishoy.profit,35000);assert.equal(r.mina.reimbursementDue,20000);assert.equal(r.bishoy.reimbursementDue,0);});
+test('distributions and reimbursements are tracked separately',()=>{const r=projectFinance(p,payments,expenses,[{project_id:'p1',partner_code:'mina',kind:'profit',amount:10000},{project_id:'p1',partner_code:'mina',kind:'reimbursement',amount:4000}]);assert.equal(r.mina.profitDue,25000);assert.equal(r.mina.reimbursementDue,16000);assert.equal(r.bishoy.profitDue,35000);});
+test('task progress uses only given project rows',()=>{assert.equal(taskProgress([{project_id:'p1',status:'done'},{project_id:'p1',status:'todo'},{project_id:'else',status:'done'}],'p1'),50);assert.equal(taskProgress([],'p1'),0);});
+test('calendar FY and configurable start month are deterministic',()=>{assert.equal(fyFor('2026-01-01'),2026);assert.equal(fyFor('2026-06-30',7),2025);assert.ok(inFY('2026-10-28',2026));assert.ok(!inFY('2025-10-28',2026));});
