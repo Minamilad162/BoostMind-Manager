@@ -1,6 +1,22 @@
-# BoostMind OS — Greenfield v1.2.0
+# BoostMind OS v1.2.2 — Official Logo (all UI surfaces)
 
-A **new, standalone** BoostMind project-management, task-delivery and financial workspace. This is **not** an upgrade to any existing project/repository/database and contains **no legacy import, migration, backward compatibility or demo company records**. The original BoostMind logo and approved light UI palette are retained.
+This is a **frontend-only branding update** on top of v1.2.1. It uses the exact user-supplied image: `boostmind-logo.webp` (900 × 236 px, RGBA). No invoice, finance, task, RLS, or database logic has changed.
+
+## Important for your Cloudflare GitHub deployment
+
+The live site screenshot showed the OLD logo despite v1.2.1 already containing the new one. This usually means the GitHub repository/branch deployed to Workers does **not yet include the v1.2.1 files**, or the deployment is stale. This update uses a new, versioned logo path to rule out old-URL asset caching; it does **not** update GitHub or Cloudflare by itself.
+
+1. Put the updated files in the exact GitHub repository and `main` branch connected to your `boostmind-manager` Cloudflare Worker. Do not accidentally deploy to the old, unrelated BoostMind marketing repository.
+2. On Cloudflare, open **Workers & Pages → boostmind-manager → Deployments** and run a new build from the updated `main` commit. Keep `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in **Build variables**.
+3. Open a private window, refresh the site, then inspect the page source for `<meta name="boostmind-release" content="1.2.2-official-logo">`. You can also open `/brand/boostmind-technology-official-v122.webp` on the live site: it must return the provided full company logo.
+4. Test the sign-in screen, the sidebar, mobile UI, blank-configuration screen, splash screen, Invoices list, invoice preview, and browser Print/PDF preview.
+5. If the meta tag or logo URL is missing, the **wrong/stale deployment** is being served; check the GitHub commit in Cloudflare deployment logs.
+
+No SQL update is required.
+
+# BoostMind OS — Greenfield v1.2.1
+
+A **new, standalone** BoostMind project-management, task-delivery and financial workspace. This is **not** an upgrade to any existing project/repository/database and contains **no legacy import, migration, backward compatibility or demo company records**. The approved BoostMind Technology corporate logo (provided by the user) and the existing light UI palette are retained.
 
 ## Included modules
 
@@ -20,7 +36,7 @@ A **new, standalone** BoostMind project-management, task-delivery and financial 
 
 ## Stack
 
-React 19 + TypeScript + Vite; Supabase Auth / Postgres / RLS (Edge Functions retained only for privileged member management); Netlify-ready frontend; GitHub Actions and Dependabot templates. The **actual BoostMind wordmark SVG** is `public/boostmind-logo.svg`, reproduced from the existing private BoostMind repository's original public asset; the navigation mark derives from the same mark geometry.
+React 19 + TypeScript + Vite; Supabase Auth / Postgres / RLS (Edge Functions retained only for privileged member management); Netlify-ready frontend; GitHub Actions and Dependabot templates. The **official company logo provided by the user** is `public/boostmind-logo.webp` (unchanged artwork). The app icon (`public/boostmind-mark.png`) and favicon (`public/favicon.png`) are cropped from that exact image; the wordmark appears in the sidebar, login and invoice previews/printouts.
 
 ## Local setup (new environment only)
 
@@ -160,3 +176,12 @@ Existing unallocated payments are left as they were; historical receipts **are n
 - Node 22 offline tests include ETA XML/JSON parsing, client/project matching and static database authorization/finance contract checks; run `npm test`.
 - Source has been syntax-checked with TypeScript parser. Full `npm install`, `npm run typecheck`, `npm run build`, browser print review, actual Supabase SQL execution and live RLS/transaction tests need a **network-enabled development/staging environment**. The current artifact is source for testing, **not a production-certified deployment**.
 - The supplied ETA import is for drafting/prefilling. It does not file, sign, validate, cancel or submit government e-invoices.
+
+
+## v1.2.1 — Official BoostMind Technology logo (2026-10-28)
+
+- Replaced the old logo/mark SVG artwork with the company logo supplied in `boostmind-logo.webp`. No re-created/reimagined wordmark.
+- Updated login (desktop/mobile), sidebar, initial setup screen, invoice studio intro, printable A4 invoice, and browser tab favicon.
+- On dark backgrounds, the original dark-blue wordmark appears on a clean white logo surface to preserve readability.
+- **No SQL update, finance changes, credentials changes, schema changes or Edge Function changes.** Deploying this release is a frontend-only update.
+- Clear your browser cache or hard-refresh after deployment if the old logo remains visible.

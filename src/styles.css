@@ -38,3 +38,27 @@ input[readonly]{background:#f4f6fc;color:#526080}
 .resource-form-hint{grid-column:1/-1;margin:0;color:#7d8ba6;line-height:1.5;font-size:11px}
 .project-access-embedded .vault-two{margin-top:14px}
 @media(max-width:760px){.project-access-header{flex-direction:column;gap:10px}.project-access-global .title-actions .inline-actions{width:100%}.project-access-global .title-actions .filter-select{flex:1;min-width:160px}.credential-row{min-width:0}.credential-content{min-width:0;overflow-wrap:anywhere}}
+
+/* v1.2.1 — approved BoostMind Technology corporate logo (source: user-supplied WEBP).
+   Keep its original colors/lettering intact and use a light surface where the sidebar is dark. */
+.sidebar-brand { height: 102px; padding: 10px 13px; align-items: center; gap: 7px; }
+.sidebar-company-brand { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.sidebar-company-brand > img { display: block; width: 100%; max-width: 218px; height: auto; max-height: 66px; object-fit: contain; background: #fff; border: 1px solid rgba(255,255,255,.15); border-radius: 10px; padding: 6px 8px; box-shadow: 0 6px 20px rgba(0,0,0,.13); }
+.sidebar-company-brand > small { padding-left: 3px; color: #9babc8; font-size: 9px; letter-spacing: .11em; white-space: nowrap; }
+.login-logo { width: fit-content; padding: 10px 13px; border-radius: 13px; background: #fff; box-shadow: 0 14px 38px rgba(0,0,0,.19); }
+.login-logo img { display: block; width: min(230px,55vw); height: auto; filter: none; }
+.login-logo span { color: #394f80; }
+.login-mobile-logo { object-fit: contain; height: auto; }
+.splash img { object-fit: contain; }
+@media (max-width:760px) {
+  .sidebar-company-brand > img { max-width: 192px; }
+  .login-mobile-logo { width: min(240px,75vw); }
+}
+
+
+/* v1.2.2 — official user-supplied company wordmark across every app state. */
+.splash img {width:min(300px,78vw); height:auto; max-height:100px; object-fit:contain;}
+.setup-screen img {width:min(300px,78vw); height:auto; object-fit:contain;}
+.sidebar-company-brand > img {width:100%; max-width:218px; height:auto; max-height:66px; object-fit:contain;}
+.login-logo img {width:min(250px,57vw); height:auto; object-fit:contain; filter:none;}
+.login-mobile-logo {width:min(260px,75vw); height:auto; object-fit:contain;}

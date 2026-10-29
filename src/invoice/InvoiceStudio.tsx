@@ -1,3 +1,4 @@
+import { BRAND_LOGO_URL } from '../brand';
 import { useEffect, useMemo, useRef, useState, type ChangeEvent, type FormEvent, type MouseEvent } from 'react';
 
 import { money } from '../lib/finance';
@@ -106,7 +107,7 @@ function InvoicePreview({ document }: { document: InvoiceStudioDocument }) {
     <article className="invoice-print-root" aria-label={`Invoice ${document.invoiceNumber}`}>
       <header className="invoice-paper-head">
         <div className="invoice-brand-block">
-          <img src="/boostmind-logo.svg" alt="BoostMind" />
+          <img src={BRAND_LOGO_URL} alt="BoostMind Technology" />
           <div className="invoice-seller-mini">
             {p.sellerLegalName ? <strong>{p.sellerLegalName}</strong> : null}
             {p.sellerAddress ? <span>{p.sellerAddress}</span> : null}
@@ -626,7 +627,7 @@ export function LegacyInvoiceStudioPage({ projects, services, clients, invoices,
 
   return <>
     <div className="page-header reveal"><div><div className="eyebrow">Finance / Client Documents</div><h1>Invoices</h1><p>Build professional BoostMind invoices, control what appears on each document, and print or save them as PDF.</p></div><div className="page-actions"><button className="btn secondary" onClick={() => setProfileOpen(true)}>Billing profile</button><button className="btn primary" onClick={() => setBuilderId(null)}>＋ New invoice</button></div></div>
-    <div className="invoice-studio-intro reveal reveal-delay-1"><div><img src="/boostmind-logo.svg" alt="BoostMind" /><div><strong>Professional invoice template</strong><span>Logo, client details, line items, tax, payment terms and transfer information in one clean A4 layout.</span></div></div><span className="soft-pill">Print / PDF ready</span></div>
+    <div className="invoice-studio-intro reveal reveal-delay-1"><div><img src={BRAND_LOGO_URL} alt="BoostMind Technology" /><div><strong>Professional invoice template</strong><span>Logo, client details, line items, tax, payment terms and transfer information in one clean A4 layout.</span></div></div><span className="soft-pill">Print / PDF ready</span></div>
     {profileWarning ? <div className="data-mode-banner warning"><strong>Billing defaults unavailable</strong><span>{profileWarning} You can still type invoice-specific details manually.</span></div> : null}
     <div className="table-shell reveal reveal-delay-2"><div className="table-scroll"><table className="data-table"><thead><tr><th>Invoice</th><th>Client / Project</th><th>Issue</th><th>Due</th><th>Status</th><th className="num">Total</th><th className="num">Collected</th><th className="num">Outstanding</th><th></th></tr></thead><tbody>
       {invoices.length ? invoices.map((invoice) => <tr key={invoice.id}><td><strong>{invoice.invoiceNumber}</strong>{invoice.electronicInvoiceReference ? <span className="subline">E-Invoice: {invoice.electronicInvoiceReference}</span> : null}</td><td><strong>{invoice.clientName}</strong><span className="subline">{invoice.projectName}</span></td><td>{invoice.issueDate}</td><td>{invoice.dueDate}</td><td><span className={`invoice-status ${statusTone(invoice.status)}`}>{invoice.status}</span></td><td className="num money">{money(invoice.total, invoice.currency)}</td><td className="num money">{money(invoice.collected, invoice.currency)}</td><td className="num money">{money(invoice.outstanding, invoice.currency)}</td><td><button className="text-button" onClick={() => setBuilderId(invoice.id)}>Open / Print →</button></td></tr>) : <tr><td colSpan={9} className="empty-row">No invoices yet. Create the first professional invoice from Invoice Studio.</td></tr>}

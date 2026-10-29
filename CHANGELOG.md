@@ -1,3 +1,15 @@
+## v1.2.2 — Versioned official BoostMind Technology logo across the website
+- Centralized the approved user-supplied logo URL in `src/brand.ts`.
+- Replaced logo references on Sign in (desktop/mobile), Sidebar, Setup screen, Splash, Invoices heading, and A4 print/PDF preview.
+- Updated favicon and touch icon references to unique, versioned file paths to avoid stale caches.
+- Added deploy/version verification in README. No SQL, finance, task, credential, or permission changes.
+
+## v1.2.1 — Official corporate logo correction (2026-10-28)
+- Use the exact user-supplied **BoostMind Technology** logo as the app's corporate visual identity.
+- Replace login, sidebar, setup and Invoice Studio brand images; regenerate favicon and app icon from the original mark.
+- Adjust only logo containers for the white/light and navy/dark contexts and preserve invoice print aspect ratio.
+- No database migration, APIs, financial logic, task behavior, roles, saved credentials or legacy compatibility changes.
+
 ## v1.1.3 — Project access grouping and custom URL/title support
 - Project selection required during creation of a saved resource.
 - Links and saved logins shown inside each Project → Links & Accounts tab, also accessible globally.

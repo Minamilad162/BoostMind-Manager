@@ -155,3 +155,10 @@
 /* Profile dialog must remain above the invoice panel and be keyboard-accessible. */
 .boost-invoice-root .modal-backdrop{position:fixed;inset:0;z-index:180;background:rgba(12,20,47,.6);backdrop-filter:blur(6px);display:grid;place-items:center;padding:18px}
 @media print{.boost-invoice-root .modal-backdrop{display:none!important}}
+
+/* Official BoostMind Technology wordmark; preserve supplied aspect ratio in PDF/A4. */
+.invoice-brand-block img, .invoice-studio-intro img { object-fit: contain; object-position: left top; }
+
+/* v1.2.2 — printed PDF displays the official BoostMind Technology logo unchanged. */
+.invoice-brand-block img {width: 196px; max-width:100%; height:auto; object-fit:contain; object-position:left center;}
+@media print {.invoice-brand-block img {width: 54mm; height:auto;}}
