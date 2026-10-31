@@ -1,3 +1,11 @@
+## v1.2.3 — Resources library (2026-10-31)
+- New company-wide Resources item in the left menu.
+- Folder CRUD (title and description); file upload/open/download/delete; full list, search and mobile-friendly layout.
+- New additive Supabase Postgres migration 006 and private Storage bucket with active user read + admin-only write/delete RLS.
+- Client and SQL enforce 20 MB size and accepted extensions; no new Edge Function, DB imports or changes to finance/invoices/projects.
+- Reuses the official user-supplied BoostMind Technology wordmark from v1.2.2.
+- Includes source tests and read-only migration verification SQL; live staging test and actual npm build remain required before production approval.
+
 ## v1.2.2 — Versioned official BoostMind Technology logo across the website
 - Centralized the approved user-supplied logo URL in `src/brand.ts`.
 - Replaced logo references on Sign in (desktop/mobile), Sidebar, Setup screen, Splash, Invoices heading, and A4 print/PDF preview.

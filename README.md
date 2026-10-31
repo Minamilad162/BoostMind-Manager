@@ -1,3 +1,17 @@
+# BoostMind OS v1.2.3 — Resources library (current release)
+
+**New section:** `Resources` in the left sidebar, available to both admin and developer accounts. It is a company-wide folder/file library, independent of project-specific Saved Logins. Create folders with a name and description; admins upload, open, download, or delete files; developers browse and download. Supported: PDF, MD, TXT, DOC/DOCX, XLS/XLSX, PPT/PPTX, CSV, JSON, SQL, PNG/JPG/WEBP, ZIP. Limit: 20 MB per file. Original official BoostMind Technology logo is unchanged.
+
+**Updating an existing v1.2.2 database:** Back up, then run **only** `supabase/migrations/202610280006_resources_library.sql` (also packaged standalone as `BoostMind_OS_v1.2.3_RESOURCES_UPDATE_ONLY.sql`). Run `supabase/VERIFY_v1.2.3_RESOURCES_READ_ONLY.sql` and check every row is `PASS`. Deploy the new React code. No new Edge Function or API keys are needed beyond existing Supabase environment variables.
+
+**Brand-new empty DB:** `supabase/BoostMind_OS_v1.2.3_FRESH_INSTALL.sql` includes migrations 001–006. **Do not run it on your live DB.**
+
+See `docs/RESOURCES_LIBRARY_v1.2.3.md` for workflow, RLS access matrix, Storage rules and release tests.
+
+**Deployment note:** For Cloudflare Workers GitHub builds, keep `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` as Cloudflare **Build variables**, then initiate a fresh Build+Deploy from your code commit. This ZIP does not push to GitHub or change Production. The existing v1.2.2 dependency lockfile/build limitations are unchanged; npm must be installed in a network-enabled environment and typecheck/build/audit must pass before Production.
+
+---
+
 # BoostMind OS v1.2.2 — Official Logo (all UI surfaces)
 
 This is a **frontend-only branding update** on top of v1.2.1. It uses the exact user-supplied image: `boostmind-logo.webp` (900 × 236 px, RGBA). No invoice, finance, task, RLS, or database logic has changed.

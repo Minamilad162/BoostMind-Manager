@@ -1,3 +1,10 @@
+## v1.2.3 approved Resources module
+- Sidebar Resources is a shared company knowledge library, not project-scoped credentials.
+- Admin: create/edit/delete folders, upload/delete files; active developers: read/open/download only.
+- Folder fields: title and description; accept PDF, MD, office docs, CSV, JSON, SQL, images, ZIP, up to 20 MB.
+- Source: `src/resources/`, migration `202610280006_resources_library.sql`, private Storage bucket `boostmind-resources`.
+- No legacy data imports, no changes to project finance or invoice logic, and official BoostMind Technology brand persists.
+
 # BOOSTMIND OS — Canonical project context
 
 **Version:** 1.0.0 greenfield source baseline · **Date:** 2026-10-28

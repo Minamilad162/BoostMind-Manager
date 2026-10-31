@@ -14,7 +14,7 @@ test('Official user image is reused byte-for-byte and versioned for CDN freshnes
   assert.ok(existsSync(join(root, 'public/brand/boostmind-technology-official-v122.webp')));
   assert.equal(digest('public/brand/boostmind-technology-official-v122.webp'), digest('public/boostmind-logo.webp'));
   assert.match(src('src/brand.ts'), /boostmind-technology-official-v122\.webp/);
-  assert.match(src('index.html'), /boostmind-release.*1\.2\.2-official-logo/);
+  assert.match(src('index.html'), /boostmind-release.*1\.2\.3-resources-library/);
 });
 
 test('The same current logo is wired to login, sidebar, setup, splash and invoice print', () => {
