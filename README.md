@@ -1,3 +1,15 @@
+# BoostMind OS v1.2.4 — Flexible Partner Shares, Collections and Expenses
+
+**Update from v1.2.3:** Back up the database, run ONLY `supabase/migrations/202610280007_flexible_partner_shares_collections_edit_expenses.sql` in the newer BoostMind Supabase project, then run `supabase/VERIFY_v1.2.4_READ_ONLY.sql`, test on staging and deploy the React source with a NEW Cloudflare GitHub build. **Never run Fresh Install on the existing DB.**
+
+**Fresh empty database:** use `supabase/BoostMind_OS_v1.2.4_FRESH_INSTALL.sql` (001–007). No import or compatibility with any old BoostMind database.
+
+**New features:** per-project percentage/manual amount partner splits (including 100%/0%), editable/deletable expenses with guardrails, cumulative project collection/outstanding, date and receiver account on each receipt, USD/EGP reports with project-weighted partner profit. Unchanged modules: Invoice Studio, Resources, tasks, users, links and official logo.
+
+See `docs/FINANCE_WORKFLOW_v1.2.4.md` for full business rules and tests. The client browser is not allowed to access developer-restricted financial tables by RLS. **No SQL was run on the user's live database, and the site is not deployed by this source package.** The npm registry was unreachable here, so a complete Vite build has not been verified.
+
+---
+
 # BoostMind OS v1.2.3 — Resources library (current release)
 
 **New section:** `Resources` in the left sidebar, available to both admin and developer accounts. It is a company-wide folder/file library, independent of project-specific Saved Logins. Create folders with a name and description; admins upload, open, download, or delete files; developers browse and download. Supported: PDF, MD, TXT, DOC/DOCX, XLS/XLSX, PPT/PPTX, CSV, JSON, SQL, PNG/JPG/WEBP, ZIP. Limit: 20 MB per file. Original official BoostMind Technology logo is unchanged.
@@ -40,7 +52,7 @@ A **new, standalone** BoostMind project-management, task-delivery and financial 
 - **Features** — project scope groups.
 - **Tasks** — Kanban and List, task status, priorities, due date, per-task assignment, project-wide assignment.
 - **Clients** — contact, email, phone, WhatsApp URL, notes.
-- **Finance** — client receipts, paid and planned expenses, company/Mina/Bishoy payment source, equal 50/50 partner economics, payouts and expense reimbursements, per-project ledgers.
+- **Finance** — client receipts, paid and planned expenses, company/Mina/Bishoy payment source, customizable project-specific partner economics (default 50/50), payouts and expense reimbursements, per-project ledgers.
 - **Team** — invite Admin/Developer, change role, deactivate/reactivate users. Admins cannot change their own access through the management function.
 - **Saved Logins** — project website, DB, hosting and GitHub URLs, plus admin-only username/password strings saved directly in Supabase with local show/hide/copy. These strings are NOT application-encrypted.
 - **Settings** — account details, reset/new password.
@@ -83,14 +95,14 @@ Create a **new private GitHub repository**. Push the source and the generated ve
 
 The `projects` table **does not contain contract amounts or currencies**. Sensitive values live in admin-RLS `project_financials`. Direct API reads by a developer must not reveal amounts. The saved-login table has column-restricted authenticated grants and active-admin-only RLS. Strings in `secret_text` are plaintext in the database; developers and anonymous clients are blocked by database access rules.
 
-## 50/50 financial policy
+## Financial policy (v1.2.4 overrides original 50/50 baseline)
 
 - **Contracted** = sum of project contract value with contract date in selected FY (expected value; not cash).
 - **Collected** = sum of actual client receipts within selected FY.
 - **Paid costs** = sum of expenses marked Paid with payment date inside selected FY; Planned is excluded.
 - **Realized net profit** = collected − paid project costs, separately per currency.
-- **Each founder's economic profit share** = 50% of *lifetime* realized net profit per project. Financial report FY headline figures are period-based; the project detail ledger is lifetime-based.
-- **Expense responsibility** = 50% each, economically reflected in net profit. If a founder pays a project expense personally, that *full amount* is recorded as a reimbursement liability to that founder so that the final cost burden is equal after reimbursement and shared profit.
+- **Each founder's economic profit share** = their project's agreed split percentage or manually derived ratio of *lifetime* realized net profit per project. Financial report FY headline figures are period-based; the project detail ledger is lifetime-based.
+- **Expense responsibility** = allocated through net-profit shares for each project, and founder-paid expenses are reimbursed separately. If a founder pays a project expense personally, that *full amount* is recorded as a reimbursement liability to that founder so that the final cost burden is equal after reimbursement and shared profit.
 - **Profit balance** = partner economic share − recorded profit distributions.
 - **Reimbursement balance** = personally funded paid expenses − recorded reimbursements.
 - Different original currencies are converted using **manually confirmed USD and EGP equivalents captured for every contract and cash transaction**. There is no report currency switch and no automatic market FX lookup.
@@ -114,7 +126,7 @@ See `docs/PROJECT_CONTEXT.md`, `docs/SECURITY_PLAN.md`, `docs/LOGIC_REGISTRY.md`
 - Apply `supabase/migrations/202610280002_dual_currency_reporting.sql` **after** `202610280001_initial.sql`. For a completely fresh database, execute `supabase/BoostMind_OS_v1.1.3_FRESH_INSTALL.sql`, which contains migrations 001, 002, and 003 in order.
 - Project contracts require original currency amount, its manually entered **USD equivalent**, and its manually entered **EGP equivalent**. When original currency is USD or EGP, that equivalent is locked equal to the original amount. The UI displays the recorded implied EGP/USD rate for transparency. For EUR/SAR, both USD and EGP equivalents are manually entered.
 - Payment, expense, and payout dialogs require USD and EGP equivalents **at transaction time**. The form proposes amounts from the project's contract ratio when available, but users must confirm the actual transaction-day values. The database validates both equivalents, rejects missing, zero/negative or inconsistent native-currency values, and stores them as records. The historical rate is never silently revalued.
-- Dashboard and Finance display **USD above EGP** for contracts, receipts, paid expenses, realized profit, and each founder's 50% economic share. Neither screen offers a currency toggle.
+- Dashboard and Finance display **USD above EGP** for contracts, receipts, paid expenses, realized profit, and each founder's project-weighted economic share. Neither screen offers a currency toggle.
 - Reporting filters: Year, Quarter Q1–Q4, Month; years begin with **2006** and extend as calendar years progress. Period filters use the **calendar year (January–December)**; project contract date determines contract value, payment date determines receipts, and paid-expense date determines costs. Planned expenses and partner payouts do not reduce period net profit again.
 - The chart uses EGP for bar heights and shows both USD/EGP in hover details. The per-project table is explicitly **lifetime**, while KPI cards follow the selected period.
 - If a v1 record exists without an exchange snapshot, v1.1 *does not invent an exchange rate*. That record is excluded from dual-currency totals and a prominent incomplete-data warning is shown. Its values require manual reconciliation in a subsequent controlled admin workflow before accurate totals can be claimed. No compatibility imports for older BoostMind projects are included.
@@ -181,7 +193,7 @@ On an entirely empty Supabase database, run **only** `supabase/BoostMind_OS_v1.2
 
 ### Accounting safeguards
 
-**Invoiced ≠ Received.** Invoices represent amounts billed and outstanding; only the existing `payments` table feeds actual company revenue and 50/50 profit. Linking a payment to an invoice does not create another receipt or duplicate accounting totals. Invoice receipt linking requires the invoice currency to equal the project's original currency; mismatched currencies must be reconciled in a separately approved FX workflow and cannot be silently converted.
+**Invoiced ≠ Received.** Invoices represent amounts billed and outstanding; only the existing `payments` table feeds actual company revenue and project-specific profit allocation. Linking a payment to an invoice does not create another receipt or duplicate accounting totals. Invoice receipt linking requires the invoice currency to equal the project's original currency; mismatched currencies must be reconciled in a separately approved FX workflow and cannot be silently converted.
 
 Existing unallocated payments are left as they were; historical receipts **are not automatically attached to invoices**. The billing profile is copied as a per-invoice snapshot, so later edits to company defaults do not rewrite old invoices. The invoice list derives overdue status by due date even if no background job runs.
 

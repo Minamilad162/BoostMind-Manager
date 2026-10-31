@@ -25,7 +25,8 @@ test('USD and EGP contracts are both included; no currency selection',()=>{
  assert.deepEqual(s.collected,{usd:3800,egp:194000});
  assert.deepEqual(s.paidExpenses,{usd:700,egp:36000});
  assert.deepEqual(s.net,{usd:3100,egp:158000});
- assert.deepEqual(s.partner,{usd:1550,egp:79000});
+ assert.deepEqual(s.partnerMina,{usd:1550,egp:79000});
+ assert.deepEqual(s.partnerBishoy,{usd:1550,egp:79000});
  assert.equal(s.missingConversions,0);
 });
 test('Q1 and Q2 use contract and cash event dates rather than project creation',()=>{

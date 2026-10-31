@@ -37,7 +37,7 @@ Build BoostMind's private, modern project and finance workspace from the user-ap
 
 ### Primary business flow
 
-Invite members → add client → create project (atomic project + finance RPC) → assign owner / project access → define features → create/assign tasks → update Kanban statuses → receive client payments / record paid & planned expenses → view net profit and partner 50/50 distribution → record partner payouts and expense reimbursements → store links/credentials in protected vault.
+Invite members → add client → create project (atomic project + finance RPC) → assign owner / project access → define features → create/assign tasks → update Kanban statuses → receive client payments / record paid & planned expenses → view net profit and per-project partner distribution (default 50/50, custom allowed) → record partner payouts and expense reimbursements → store links/credentials in protected vault.
 
 ### Future work explicitly deferred
 

@@ -121,3 +121,24 @@ input[readonly]{background:#f4f6fc;color:#526080}
 .resources-footer-note{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:15px;color:#97a4bb;font-size:10px}
 @media(max-width:850px){.resources-overview{grid-template-columns:repeat(3,minmax(0,1fr))}.resources-overview>div{padding:12px;flex-wrap:wrap}.resources-overview small{margin:0;width:100%}}
 @media(max-width:640px){.resources-overview{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.resources-overview>div:last-child{grid-column:1/-1}.resources-overview-icon{height:33px;width:33px}.resources-overview strong{font-size:18px}.resources-overview small{width:auto;margin-left:auto}.resources-toolbar-right,.resources-search{width:100%}.resources-search input{flex:1;width:100%;min-width:0}.resources-folder-grid{grid-template-columns:1fr}.resources-folder-main{min-height:165px}.resources-inside-header{align-items:flex-start}.resources-folder-icon.large{width:40px;height:40px}.resources-file-row{align-items:flex-start;flex-wrap:wrap}.resources-file-meta{flex-basis:calc(100% - 60px)}.resources-file-actions{width:100%;padding-left:55px}.resources-file-actions .btn{flex:1}.resources-file-actions .icon-btn{margin-left:auto}}
+
+/* v1.2.4 — flexible founder allocation, collection and expense administration */
+.split-title{grid-column:1/-1;font-size:14px;font-weight:800;color:#283454;border-top:1px solid #e9edf6;padding-top:17px;margin-top:5px}
+.split-title small{display:block;font-size:11px;font-weight:500;color:#7383a1;margin-top:4px}
+.allocation-preview{grid-column:1/-1;background:#f4f6ff;border:1px solid #dedffc;border-radius:13px;padding:12px 15px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.allocation-preview>div{display:flex;flex-direction:column;gap:4px}
+.allocation-preview>div>span{font-size:11px;color:#6f7b99;font-weight:650}
+.allocation-preview>div>strong{font-size:18px;color:#3d4b86}
+.allocation-preview>small{grid-column:1/-1;color:#6c7895;line-height:1.55;font-size:11px}
+.collection-form-help{grid-column:1/-1;color:#536ba7;background:#eef5ff;border-radius:9px;font-size:11px;padding:10px 12px}
+.receiver-caption{display:flex;flex-direction:column;gap:4px;text-align:right;color:#4c5a84;font-size:11px;font-weight:750}
+.receiver-caption small{font-weight:500;color:#98a4bb}
+.ledger-actions{display:flex;gap:8px;align-items:center;flex-shrink:0}
+.danger-text{color:#bb4456!important}
+.danger-button{background:#cb4b5c;color:#fff;border:1px solid #b84352}
+.danger-button:hover{background:#af354a}
+.finance-expense-panel{margin-top:20px}
+@media(max-width:700px){.allocation-preview{grid-template-columns:1fr}.allocation-preview>small{grid-column:1}.ledger-actions{flex-wrap:wrap}.receiver-caption{text-align:left}}
+.project-collection-summary{display:flex;flex-direction:column;gap:5px;min-width:130px}
+.project-collection-summary small{font-size:10px;color:#8491a7}
+.project-collection-summary b{line-height:1.35}

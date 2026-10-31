@@ -1,3 +1,13 @@
+# v1.2.4 — Flexible project partner allocations, collections and expense revisions
+
+- Added per-project percentage vs manual partner value splits, 100/0 supported, validated by new project RPC and database constraints.
+- Dashboard/Finance partner economic shares are weighted by the actual project's split, not hardcoded 50/50. Payout limits honor the split.
+- Project cards and details show collected and contract balance, valued at agreed contract FX to avoid negative outstanding due solely to FX movements.
+- Partial collections record date, method, receiver account and optional invoice. SQL prevents overcollection and requires receiver for new receipts; old receivers stay unknown.
+- Admin expense edit and delete available from Finance and the Project financial tab. Database automatically audits and rejects financial updates that make existing payouts/reimbursements invalid.
+- New migration 007 and verification SQL. No data import or changes to unrelated application modules.
+- Local Node test suite: 43 passing; TypeScript syntax parse passed. Full npm build and live Supabase tests are pending.
+
 ## v1.2.3 — Resources library (2026-10-31)
 - New company-wide Resources item in the left menu.
 - Folder CRUD (title and description); file upload/open/download/delete; full list, search and mobile-friendly layout.
